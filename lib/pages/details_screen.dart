@@ -181,6 +181,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = CartProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("details"),
@@ -258,7 +259,7 @@ class DetailsScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8,),
-                Row(
+                const Row(
                   children: [
                     AvailableSize(size: "us 6"),
                     AvailableSize(size: "us 7"),
@@ -266,7 +267,7 @@ class DetailsScreen extends StatelessWidget {
                     AvailableSize(size: "us 9"),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -278,19 +279,17 @@ class DetailsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
-                    SizedBox(width: 8),
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.blue,
                     ),
-                    SizedBox(width: 8),
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.red,
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: 8,),
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.black,
@@ -327,7 +326,9 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton.icon(
-                    onPressed:  (){},
+                    onPressed:  (){
+                      provider.toggleProduct(product);
+                    },
                     icon: const Icon(Icons.send),
                     label: const Text("Add to Cart"))
               ],
