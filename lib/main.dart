@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ghandiishop/pages/cart_details.dart';
-import 'package:ghandiishop/pages/favorite_screen.dart';
-import 'package:ghandiishop/pages/home_screen.dart';
-import 'package:ghandiishop/pages/profile_screen.dart';
-import 'package:ghandiishop/providers/cart_provider.dart';
-import 'package:ghandiishop/providers/favorite_provider.dart';
+
+
 import 'package:provider/provider.dart';
+
+import 'cart_details.dart';
+import 'cart_provider.dart';
+import 'favorite_provider.dart';
+import 'favorite_screen.dart';
+import 'home.dart';
+import 'home_screen.dart';
 
 
 void main()=> runApp(const MyApp());
@@ -22,10 +25,10 @@ class MyApp extends StatelessWidget {
       title: "ghandii's shop",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorSchemeSeed: Colors.red,
+        colorSchemeSeed: Colors.blue,
         scaffoldBackgroundColor: Colors.grey.shade100,
       ),
-      home: const HomePage(),
+      home: const Home(),
     ),
   );
 }
@@ -44,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   List screen = [
     const HomeScreen(),
     const FavoriteScreen(),
-    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -90,3 +92,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+
