@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:modi_shop/product.dart';
 import 'package:provider/provider.dart';
-import '../models/product.dart';
+
 
 class CartProvider extends ChangeNotifier {
 
