@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ghandiishop/pages/details_screen.dart';
-import '../models/my_product.dart';
-import '../widgets/product_dart.dart';
+import 'package:modi_shop/product_card.dart';
+import 'product.dart';
+import 'details_screen.dart';
+
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +14,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Product> _products = [];
+  List<Product> _products2 = [];
+  List<Product> _products3 = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProducts();
+    fetchProducts2();
+    fetchProducts3();
+  }
+
+  Future<void> fetchProducts() async {
+    try {
+      List<Product> products = await Product.fetchProducts();
+      setState(() {
+        _products = products;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
+
+  Future<void> fetchProducts2() async {
+    try {
+      List<Product> products2 = await Product.fetchProducts2();
+      setState(() {
+        _products2 = products2;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> fetchProducts3() async {
+    try {
+      List<Product> products3 = await Product.fetchProducts3();
+      setState(() {
+        _products3 = products3;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   int isSelected = 0;
   @override
   Widget build(BuildContext context) {
@@ -48,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   }
 
-  _buildProductCategory({required int index, required String name}) =>
+  _buildProductCategory({required int index, required String? name}) =>
       GestureDetector(
         onTap: () => setState(() => isSelected = index),
         child: Container(
@@ -57,12 +107,12 @@ class _HomeScreenState extends State<HomeScreen> {
           margin: const EdgeInsets.only(top: 10, right: 10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: isSelected == index ? Colors.red : Colors.red.shade300,
+              color: isSelected == index ? Colors.blue : Colors.blue.shade300,
               borderRadius: BorderRadius.circular(8)
           ),
-          child: Text(
-            "name",
-            style: const TextStyle(color: Colors.white),
+          child:  Text(
+            name!,
+            style:  TextStyle(color: Colors.white),
           ),
         ),
       );
@@ -76,9 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSpacing: 12,
     ),
     scrollDirection: Axis.vertical,
-    itemCount: MyProducts.allProducts.length,
+    itemCount: _products.length,
     itemBuilder: (context, index){
-      final allProducts = MyProducts.allProducts[index];
+      final allProducts = _products[index];
       return GestureDetector(
         onTap: ()=> Navigator.push(
           context,
@@ -100,9 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSpacing: 12,
     ),
     scrollDirection: Axis.vertical,
-    itemCount: MyProducts.jacketsList.length,
+    itemCount: _products2.length,
     itemBuilder: (context, index){
-      final jacketsList = MyProducts.jacketsList[index];
+      final jacketsList = _products2[index];
       return GestureDetector(
         onTap: ()=> Navigator.push(
           context,
@@ -124,9 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSpacing: 12,
     ),
     scrollDirection: Axis.vertical,
-    itemCount: MyProducts.sneakersList.length,
+    itemCount: _products3.length,
     itemBuilder: (context,  index ){
-      final sneakersList = MyProducts.sneakersList[index];
+      final sneakersList = _products3[index];
       return GestureDetector(
         onTap: ()=> Navigator.push(
           context,
